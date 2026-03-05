@@ -24,7 +24,7 @@ $addContainer[who;$getRoleColor[$highestRole[$var[user]]]]
 $addTextDisplay[-# $replaceText[$replaceText[$replaceText[$replaceText[$getUserStatus[$var[user]];online;🟢;1];dnd;🔴;1];idle;🟡;1];offline;⚪;1]  $username[$var[user]] • $var[gname];who]
 $addSeparator[true;;who]
 $addTextDisplay[__Basic Info__
-Dm's: $replaceText[$replaceText[$isUserDMEnabled[$var[user]];false;❌;;-1];true;✅;;-1]
+Dm's: $replaceText[$replaceText[$isUserDMEnabled[$var[user]];false;❌;-1];true;✅;-1]
 Tag: $var[tag]
 Custom Status: `$getCustomStatus[$var[user]]`
 Badges: $var[badges];who]
@@ -36,3 +36,7 @@ $addSeparator[true;;who]
 $addTextDisplay[__Extra Info__
 Mention: `<@$var[user]>`
 Highest Role: $roleName[$highestRole[$var[user]]];who]]
+$addActionRow[whorow;who]
+$addButtonCV2[avatar-$var[user]-$authorID;Avatar/Banner;secondary;false;;whorow]
+$addButtonCV2[roles-$var[user]-$authorID;Roles;success;false;;whorow]
+$addButtonCV2[perms-$var[user]-$authorID;Permissions;danger;false;;whorow]
