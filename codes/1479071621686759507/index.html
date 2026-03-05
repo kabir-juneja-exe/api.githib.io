@@ -1,0 +1,78 @@
+{
+  "results": [
+    {
+      "test": "$nomention
+hello $username",
+      "ping": "$addContainer[myPing;#ffffff]
+$addTextDisplay[**Ping:** $ping;myPing]
+$addSeparator[true;small;myPing]
+$addTextDisplay[Hosting overs in <t:$hostingExpireTime[yes]:R> ($hostingExpireTime);myPing]",
+      "user-info": "$nomention
+$argsCheck[1;Usage: `?who <mention>`]
+$var[user;$mentioned[>]]
+$var[api;https://japi.rest/discord/v1/user/$var[user]]
+$httpGet[$var[api]]
+$var[result;$httpResult[data;public_flags_array]]
+$var[array;$toTitleCase[$replaceText[$var[result];_; ]]]
+$var[no-array;$replaceText[$replaceText[$replaceText[$replaceText[$var[array];[;];\];];";];,;, ]]
+$var[badges;$var[no-array]]
+$var[tag;"$httpResult[data;clan;tag]"]
+$var[gname;$httpResult[data;global_name]]
+$var[cstatus;`$getCustomStatus[$var[user]]`]
+$async[created]
+$httpGet[https://helloacm.com/api/unix-timestamp-converter/?cached&s=$creationDate[$var[user];2006/01/02+03:04:05]]
+$httpResult
+$endasync
+$var[created;<t:$trimSpace[$await[created]]:R> ( <t:$trimSpace[$await[created]]> )]
+$async[joined]
+$httpGet[https://helloacm.com/api/unix-timestamp-converter/?cached&s=$userJoined[$var[user];2006/01/02+03:04:05]]
+$httpResult
+$endasync
+$var[joined;<t:$trimSpace[$await[joined]]:R> ( <t:$trimSpace[$await[joined]]> )]
+$addContainer[who;$getRoleColor[$highestRole[$var[user]]]]
+$addTextDisplay[-# $replaceText[$replaceText[$replaceText[$replaceText[$getUserStatus[$var[user]];online;<:online:818199420104343582>;1];dnd;<:dnd:818199339288756225>;1];idle;<:idle:818199378748506182>;1];offline;<:offline:818199477600387122>;1]  $username[$var[user]] • $var[gname];who]
+$addSeparator[true;;who]
+$addTextDisplay[__Basic Info__
+Dm's: $replaceText[$replaceText[$isUserDMEnabled[$var[user]];false;:1000624861:;-1];true;:1000624863:;-1]
+Tag: $var[tag]
+Custom Status: `$getCustomStatus[$var[user]]`
+Badges: $var[badges];who]
+$addSeparator[true;;who]
+$addTextDisplay[__Account Info__
+Created: $var[created]
+Joined: $var[joined];who]
+$addSeparator[true;;who]
+$addTextDisplay[__Extra Info__
+Mention: `<@$var[user]>`
+Highest Role: $roleName[$highestRole[$var[user]]];who]]",
+      "server-info": "$nomention
+$addContainer[si;$getRoleColor[$highestRole]]
+$addTextDisplay[### $serverName[$guildID];si]
+$addSeparator[true;;si]
+$httpAddHeader[apikey;JaWnWShdWpMZvLU6coxUTkZ9GeGSdM3rnkbdGzxRAqZiniiFxI]
+$httpAddHeader[bot-token;MTQ0NzI0NDgyMjYxNTQyNTAyNA.GCVkku.D6AjaqRSDFJ_HM3YFiopX_EBkID5bEtSxG8qUM]
+$httpAddHeader[guild-id;$guildID]
+$httpGet[https://bdfddata.rickyjs.xyz/release/guild/members?simple=true]
+$addTextDisplay[__Members Info__
+Total users: $httpResult[details;count;total]
+Humans: $httpResult[details;count;users] Bots: $httpResult[details;count;bots]
+<:online:818199420104343582> $membersCount[online] <:offline:818199477600387122> $membersCount[offline]
+<:idle:818199378748506182> $membersCount[idle] <:dnd:818199339288756225> $membersCount[dnd];si]
+$addSeparator[true;;si]
+$addTextDisplay[__Boost Info__
+Boost Count: $boostCount
+Boost Level: $boostLevel;si]
+$addSeparator[true;;si]
+$addTextDisplay[__Icon Info__
+- [Icon\]($serverIcon);si]
+$addSeparator[true;;si]
+$addTextDisplay[__Other Info__
+Highest Role: $roleName[$highestRole]
+Server Owner: $username[$serverOwner]
+Role Count: $roleCount
+Emoji Count: $emoteCount
+Channel Count: $sub[$channelCount;$categoryCount]
+Verification Level: $serverVerificationLvl;si]"
+    }
+  ]
+}
