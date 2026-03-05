@@ -11,20 +11,20 @@ $var[tag;"$httpResult[data;clan;tag]"]
 $var[gname;$httpResult[data;global_name]]
 $var[cstatus;`$getCustomStatus[$var[user]]`]
 $async[created]
-$httpGet[https://helloacm.com/api/unix-timestamp-converter/?cached&s=$creationDate[$var[user];2006/01/02+03:04:05]]
+$httpGet[https://helloacm.com/api/unix-timestamp-converter/?cached&s=$creationDate[$var[user];2006/1/2+3:4:5]]
 $httpResult
 $endasync
 $var[created;<t:$trimSpace[$await[created]]:R> ( <t:$trimSpace[$await[created]]> )]
 $async[joined]
-$httpGet[https://helloacm.com/api/unix-timestamp-converter/?cached&s=$userJoined[$var[user];2006/01/02+03:04:05]]
+$httpGet[https://helloacm.com/api/unix-timestamp-converter/?cached&s=$userJoined[$var[user];2006/1/2+3:4:5]]
 $httpResult
 $endasync
 $var[joined;<t:$trimSpace[$await[joined]]:R> ( <t:$trimSpace[$await[joined]]> )]
 $addContainer[who;$getRoleColor[$highestRole[$var[user]]]]
-$addTextDisplay[-# $replaceText[$replaceText[$replaceText[$replaceText[$getUserStatus[$var[user]];online;<:online:1478748079313391697>;1];dnd;<:dnd:1478748119717122070>;1];idle;<:idle:1478748081427054612>;1];offline;<:offline:1478748123085148281>;1]  $username[$var[user]] • $var[gname];who]
+$addTextDisplay[-# $replaceText[$replaceText[$replaceText[$replaceText[$getUserStatus[$var[user]];online;🟢;1];dnd;🔴;1];idle;🟡;1];offline;⚪;1]  $username[$var[user]] • $var[gname];who]
 $addSeparator[true;;who]
 $addTextDisplay[__Basic Info__
-Dm's: $replaceText[$replaceText[$isUserDMEnabled[$var[user]];false;<a:1000624861:1478633401048236084>;-1];true;<a:1000624863:1478633391812378736>;-1]
+Dm's: $replaceText[$replaceText[$isUserDMEnabled[$var[user]];false;❌;;-1];true;✅;;-1]
 Tag: $var[tag]
 Custom Status: `$getCustomStatus[$var[user]]`
 Badges: $var[badges];who]
