@@ -1,10 +1,35 @@
-{
-  "result": {
-    "name": "Kabir",
-    "surname": "Juneja",
-    "id": "kabirexe",
-    "id2": "kabirop",
-    "id3": "kabirhere"
-  }
-}
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// 1. THE API ROUTE (For BDFD $httpGet)
+app.get('/api', (req, res) => {
+  res.json({
+    "result": {
+      "name": "Kabir",
+      "surname": "Juneja",
+      "id": "kabirexe",
+      "id2": "kabirop",
+      "id3": "kabirhere"
+    }
+  });
+});
+
+// 2. THE WEBSITE ROUTE (For Humans/Browsers)
+app.get('/', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="refresh" content="0; url=https://ikabir.vercel.app">
+        <script>window.location.replace("https://ikabir.vercel.app");</script>
+    </head>
+    <body style="background:#000;"></body>
+    </html>
+  `);
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is live on port ${PORT}`);
+});
 
