@@ -1,9 +1,7 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// 1. THE API ROUTE (For BDFD $httpGet)
-app.get('/api', (req, res) => {
+app.get('/user-info', (req, res) => {
   res.json({
     "result": {
       "name": "Kabir",
@@ -15,21 +13,10 @@ app.get('/api', (req, res) => {
   });
 });
 
-// 2. THE WEBSITE ROUTE (For Humans/Browsers)
+// Redirect the main page
 app.get('/', (req, res) => {
-  res.send(`
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta http-equiv="refresh" content="0; url=https://ikabir.vercel.app">
-        <script>window.location.replace("https://ikabir.vercel.app");</script>
-    </head>
-    <body style="background:#000;"></body>
-    </html>
-  `);
+  res.redirect(302, 'https://ikabir.vercel.app');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is live on port ${PORT}`);
-});
+module.exports = app;
 
