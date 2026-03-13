@@ -1,26 +1,10 @@
-const express = require('express');
-const app = express();
-const PORT = 3000;
-
-// This function handles the HTTP GET request
-app.get('/api/kabir', (req, res) => {
-  
-  // This is the exact object you asked for
-  const responseData = {
-    "result": {
-      "name": "Kabir",
-      "surname": "Juneja",
-      "id": "kabirexe",
-      "id2": "kabirop",
-      "id3": "kabirhere"
-    }
-  };
-
-  // Sending the response back to the user
-  res.status(200).json(responseData);
-});
-
-app.listen(PORT, () => {
-  console.log(`✅ API is live at http://localhost:${PORT}/api/kabir`);
-});
+{
+  "result": {
+    "name": "Kabir",
+    "surname": "Juneja",
+    "id": "kabirexe",
+    "id2": "kabirop",
+    "id3": "kabirhere"
+  }
+}
 
