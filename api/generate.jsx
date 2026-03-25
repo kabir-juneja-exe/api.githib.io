@@ -1,103 +1,92 @@
 import { ImageResponse } from '@vercel/og';
-import qs from 'qs';
 
 export const config = {
   runtime: 'edge',
 };
 
 export default function handler(req) {
-  const { searchParams } = new URL(req.url);
-  const query = qs.parse(searchParams.toString());
+  try {
+    const { searchParams } = new URL(req.url);
 
-  // Set the image dimensions (classic embed size)
-  const width = 1200;
-  const height = 630;
+    // Get parameters from the URL
+    const username = searchParams.get('username') || 'Discord User';
+    const text = searchParams.get('text') || 'Quote goes here...';
+    const avatar = searchParams.get('avatar') || 'https://cdn.discordapp.com/embed/avatars/0.png';
 
-  // Define dynamic content or defaults
-  const avatarUrl = query.avatar || 'https://i.pravatar.cc/300?u=kabir_demo'; // Default image if missing
-  const usernameText = query.username || 'Discord User';
-  const quoteText = query.text || 'You should definitely update this dynamic quote in the URL parameters.';
-
-  return new ImageResponse(
-    (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row', // Horizontal layout: avatar | quote
-          width: '100%',
-          height: '100%',
-          backgroundColor: '#313338', // Classic Discord dark background
-          padding: '60px 80px',
-          fontFamily: 'sans-serif',
-          color: '#f2f3f5', // Main text color
-        }}
-      >
-        {/* Author Avatar Column */}
+    return new ImageResponse(
+      (
         <div
           style={{
             display: 'flex',
-            marginRight: '60px',
+            flexDirection: 'row',
+            alignItems: 'center',
+            width: '100%',
+            height: '100%',
+            backgroundColor: '#313338', // Discord Dark Mode BG
+            padding: '40px 60px',
+            fontFamily: 'sans-serif',
           }}
         >
-          <img
-            src={avatarUrl}
-            alt="Author Avatar"
-            style={{
-              width: '280px', // Extra large avatar like the bot
-              height: '280px',
-              borderRadius: '50%',
-              border: '10px solid #2b2d31', // Subtle inset look
-              objectFit: 'cover', // Ensures the image isn't stretched
-            }}
-          />
-        </div>
-
-        {/* Content Column (Author + Quote) */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            flex: 1, // Takes up remaining horizontal space
-          }}
-        >
-          {/* Author Name */}
-          <div
-            style={{
-              fontSize: 50,
-              fontWeight: 700,
-              color: '#ffffff',
-              marginBottom: '30px',
-              textShadow: '0 2px 4px rgba(0,0,0,0.3)',
-            }}
-          >
-            {usernameText}
+          {/* Avatar Section */}
+          <div style={{ display: 'flex', marginRight: '40px' }}>
+            <img
+              src={avatar}
+              alt="avatar"
+              style={{
+                width: '250px',
+                height: '250px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+              }}
+            />
           </div>
 
-          {/* Quote Text (Always in quotes) */}
+          {/* Content Section */}
           <div
             style={{
               display: 'flex',
-              fontSize: 60,
-              fontWeight: 400,
-              fontStyle: 'italic',
-              color: '#dbdee1', // Slightly softer text color
-              lineHeight: 1.3,
-              // Adding the inverted commas directly in the structure
-              position: 'relative', 
+              flexDirection: 'column',
+              justifyContent: 'center',
+              flex: 1,
             }}
           >
-            <span style={{color: '#f2f3f5', marginRight: '10px'}}>"</span>
-            <span>{quoteText}</span>
-            <span style={{color: '#f2f3f5', marginLeft: '10px'}}>"</span>
+            {/* Username */}
+            <div
+              style={{
+                fontSize: '48px',
+                fontWeight: 'bold',
+                color: '#ffffff',
+                marginBottom: '15px',
+              }}
+            >
+              {username}
+            </div>
+
+            {/* Quote with Inverted Commas */}
+            <div
+              style={{
+                display: 'flex',
+                fontSize: '55px',
+                color: '#dbdee1',
+                fontStyle: 'italic',
+                lineHeight: '1.2',
+              }}
+            >
+              <span style={{ color: '#ffffff', marginRight: '8px' }}>"</span>
+              {text}
+              <span style={{ color: '#ffffff', marginLeft: '8px' }}>"</span>
+            </div>
           </div>
         </div>
-      </div>
-    ),
-    {
-      width: 1200,
-      height: 630,
-    }
-  );
+      ),
+      {
+        width: 1200,
+        height: 630,
+      }
+    );
+  } catch (e) {
+    return new Response(`Failed to generate the image`, {
+      status: 500,
+    });
+  }
 }
-
