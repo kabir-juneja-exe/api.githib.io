@@ -1,13 +1,7 @@
 {
-  "name": "quoteit-web",
-  "version": "1.0.0",
-  "scripts": {
-    "dev": "vercel dev"
-  },
   "dependencies": {
-    "@vercel/og": "^0.6.0",
-    "react": "^18.2.0",
-    "qs": "^6.12.3"
+    "@vercel/og": "latest",
+    "react": "latest",
+    "qs": "latest"
   }
 }
-
