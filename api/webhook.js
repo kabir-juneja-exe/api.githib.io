@@ -26,18 +26,19 @@ module.exports = async (req, res) => {
         const user = await client.users.fetch(vote.user);
         
         if (user) {
-            // Create the Embed
+            // Create the updated Embed
             const voteEmbed = new EmbedBuilder()
-                .setTitle(`Thank you for voting for Aurora`)
+                .setAuthor({ 
+                    name: 'Thanks for voting', 
+                    iconURL: client.user.displayAvatarURL() 
+                })
                 .setDescription("Thanks for voting for me in top.gg! Your vote means a lot to me, it lets me grow even more so if you're free after 12 hours, please [vote](https://top.gg/bot/1483861970242502686/vote) for me <:milk_heart:1479726148740055184>")
                 .setFooter({ 
-                    text: new Date().toLocaleString(), 
-                    iconURL: user.displayAvatarURL({ dynamic: true }) 
+                    text: 'U have access to commands for 12 hours' 
                 });
 
-            // Send the ping and the embed
+            // Send the embed (ping removed)
             await user.send({ 
-                content: `<@${user.id}>`, 
                 embeds: [voteEmbed] 
             });
         }
