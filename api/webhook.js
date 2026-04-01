@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const Topgg = require('@top-gg/sdk');
 
 const client = new Client({ 
@@ -26,7 +26,20 @@ module.exports = async (req, res) => {
         const user = await client.users.fetch(vote.user);
         
         if (user) {
-            await user.send("Thanks for voting! You're a legend. 🚀");
+            // Create the Embed
+            const voteEmbed = new EmbedBuilder()
+                .setTitle(`Thanks for Voting ${user.username}`)
+                .setDescription("Thanks for voting me on top.gg now you can use all the restricted commands. 🙏🏻")
+                .setFooter({ 
+                    text: new Date().toLocaleString(), 
+                    iconURL: user.displayAvatarURL({ dynamic: true }) 
+                });
+
+            // Send the ping and the embed
+            await user.send({ 
+                content: `<@${user.id}>`, 
+                embeds: [voteEmbed] 
+            });
         }
 
         // Vercel-friendly response
