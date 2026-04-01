@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
             // Create the Embed
             const voteEmbed = new EmbedBuilder()
                 .setTitle(`Thank you for voting for Aurora`)
-                .setDescription("Thanks for voting me on [top.gg](https://top.gg/bot/1483861970242502686/vote) now you can use all the restricted commands. 🙏🏻")
+                .setDescription("Thanks for voting for me in top.gg! Your vote means a lot to me, it lets me grow even more so if you're free after 12 hours, please [vote](https://top.gg/bot/1483861970242502686/vote) for me <:milk_heart:1479726148740055184>")
                 .setFooter({ 
                     text: new Date().toLocaleString(), 
                     iconURL: user.displayAvatarURL({ dynamic: true }) 
