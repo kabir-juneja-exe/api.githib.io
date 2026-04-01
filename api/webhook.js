@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
         if (user) {
             // Create the Embed
             const voteEmbed = new EmbedBuilder()
-                .setTitle(`Thanks for Voting ${user.username}`)
+                .setTitle(`Thank you for voting for [Aurora](https://top.gg/bot/1483861970242502686/vote)`)
                 .setDescription("Thanks for voting me on top.gg now you can use all the restricted commands. 🙏🏻")
                 .setFooter({ 
                     text: new Date().toLocaleString(), 
