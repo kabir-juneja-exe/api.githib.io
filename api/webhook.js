@@ -26,8 +26,9 @@ module.exports = async (req, res) => {
         const user = await client.users.fetch(vote.user);
         
         if (user) {
-            // Create the updated Embed
+            // Create the updated Embed with Color
             const voteEmbed = new EmbedBuilder()
+                .setColor(0xffd700) // Applied the ffd700 color here
                 .setAuthor({ 
                     name: 'Thanks for voting', 
                     iconURL: client.user.displayAvatarURL() 
@@ -37,7 +38,7 @@ module.exports = async (req, res) => {
                     text: 'U have access to commands for 12 hours' 
                 });
 
-            // Send the embed (ping removed)
+            // Send the embed
             await user.send({ 
                 embeds: [voteEmbed] 
             });
